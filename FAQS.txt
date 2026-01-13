@@ -1,0 +1,28 @@
+Q1) What is Entity?
+ 
+👉 @Entity is an annotation type; Product is a concrete java class.
+         (Annotations are internally interfaces in Java.). 
+
+               (OR) 
+
+👉 @Entity marks a Java class as a JPA entity.
+    The Product class represents a database table, and its instance variables represent the
+    columns of that table.
+    Each object of the Product class represents one row in the table.
+
+👉 Note : By default, the entity class name is used as the table name unless overridden using @Table
+
+---
+
+Q2) How do we rename a database table in a Java Entity class?
+      👉 We use the @Table annotation. 
+
+---
+
+Q3) What is ORM? How do we implement in spring boot?
+     👉 ORM (Object Relational Mapping) is a technique that maps Java classes to database tables and
+        class variables to table columns.
+        In Spring Boot, ORM is implemented using JPA, with Hibernate as the underlying ORM framework.
+
+---
+  

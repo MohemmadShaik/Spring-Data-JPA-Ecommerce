@@ -1,0 +1,183 @@
+Day 1 : 9th Jan 2026
+---------------------
+Requirement : Below are the 3 must be installed in your local machine before starting
+
+1)Mysql Database :
+
+-Installed MySQL : Admin password : Admin@2026
+-After setting the mysql server bin path (i.e C:\Program Files\MySQL\MySQL Server 8.0\bin)
+ in the environmental varibles path.
+-Open command prompt and check the mysql version :
+  > mysql --version
+-connect to mysql server :
+  > mysql -u root -p 
+    Enter password : Admin@2026
+  
+2)Java 21 version
+
+3) Intellij IDE
+
+
+Day 1 (9th jan 2026) live class chat content :
+
+Here we were going to build a Ecommerce application which we finally going
+to deploy it in cloud server.
+
+Dependencies :
+
+1.Spring Web
+2.Spring Data JPA.
+3.Spring Boot Dev Tools
+4.MySQL Driver
+5.Lombok
+
+
+
+// JPA will create implementation for this method based on method name
+	// Generate query: SELECT * FROM ecom_products WHERE category = ?
+	// Executed when this method is called
+	// Return data as List<Product>
+	// JPA -> Hibernate -> JDBC -> SQL
+	
+----------------------------
+
+	// 3 way to Implment Dependency Injection
+	
+	//1. Field Injection
+	//2. Constructor Injection
+	//3. Setter Injection
+----------------------------
+
+@Data
+@Entity
+@Table(name = "ecom_products")
+public class Product {  // table name
+
+	//ORM - Object Relational Mapping
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	int id;   // column name
+	
+	@Column(name = "product_name", length = 100)
+	String name;
+	
+	@Column(nullable = false)
+	float price;
+	
+	String category;
+	
+}
+
+
+---------------------
+
+import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class ProductController {
+
+	private ProductService service;
+	
+	public ProductController(ProductService service) {
+		this.service = service;
+	}
+	
+	@GetMapping("/products")
+	public List<Product> getProducts() {
+		return service.getAllProducts();
+	}
+	
+	@PostMapping("/products")
+	public String addProduct(@RequestBody Product product) {
+		return service.addProduct(product);
+	}
+}
+
+------------------------
+
+# PostgreSQL Configuration
+# spring.datasource.url=jdbc:postgresql://localhost:5432/ecom_db
+# spring.datasource.username=postgres
+# spring.datasource.password=your_password
+# spring.datasource.driver-class-name=org.postgresql.Driver
+
+#Oracle Configuration
+# spring.datasource.url=jdbc:oracle:thin:@localhost:1521:xe
+# spring.datasource.username=your_username
+# spring.datasource.password=your_password
+# spring.datasource.driver-class-name=oracle
+-------------------------
+
+# MySQL Configuration
+spring.datasource.url=jdbc:mysql://localhost:3306/ecom
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# JPA Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+
+---------------------
+
+
+# YML Syntax Example
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/ecom
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    jpa:
+        hibernate:
+        ddl-auto: update
+        show-sql: true
+		
+-------------------------------
+
+<dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <version>2.4.240</version>
+    <scope>test</scope>
+</dependency>
+
+--------------------------
+
+# H2 Console Configuration
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.datasource.platform=h2
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driver-class-name=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=sa
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+-------------------------
+
+<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.8.13</version>
+</dependency>
+
+------------------------------
+
+http://localhost:8080/swagger-ui/index.html#/
+
+Interview point :
+Difference between Controller vs restcontroller
+
+
+
+Swagger link :
+
+http://localhost:8080/swagger-ui/index.html
+
+Linked profile feedback:
+=======================
